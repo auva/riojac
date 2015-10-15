@@ -26,10 +26,7 @@ Las estaciones disponibles son:
 *Yerga
 
 # Aplicación compilada
-La aplicación está pendiente de aprobación en Google Play, por lo que podrás encontrarla directamente en tu móvil Android en un breve plazo.
-
-Si no puedes esperar y no quieres compilar la aplicación directamente desde las fuentes, puedes descargarte la apk desde el enlace siguiente: 
-https://www.dropbox.com/s/vkefjvylp29jhf6/RiojaC-release-1.0.apk?dl=0
+La aplicación está disponible en google play, puedes instalarla desde la dirección siguiente: https://play.google.com/store/apps/details?id=es.auva.android.riojamet
 
 # Compilación
 Puedes compilar la aplicación con AndroidStudio (comprobado con la versión 1.4); necesitarás la SDK 22 de Android y la biblioteca Android Support.
