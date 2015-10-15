@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:orientation="vertical"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:gravity="center"
+  android:layout_margin="4dp"
+  android:background="@drawable/background">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_gravity="center">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageButton
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:id="@+id/settingsButton"
+                    android:text="@string/settings_button_text"
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/ic_settings_applications_48dp"
+                    android:scaleType="fitCenter"
+                    android:layout_gravity="center" />
+                <!-- Deactivate the graph button temporarily, we have to make work asynchronously.
+                -->
+                <ImageButton
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:text="@string/chart_button_text"
+                    android:id="@+id/button"
+                    android:layout_gravity="center"
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/ic_poll_white_48dp"
+                    android:scaleType="fitCenter" />
+
+                <ImageButton
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:id="@+id/imageButton"
+                    android:src="@drawable/ic_refresh_white_48dp"
+                    android:background="@android:color/transparent"
+                    android:scaleType="fitCenter"
+                    android:layout_gravity="center" />
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width ="wrap_content"
+                android:layout_height ="wrap_content"
+                android:layout_weight = "1">
+                    <ImageButton
+                        android:layout_width="60dp"
+                        android:layout_height="30dp"
+                        android:id="@+id/logoButton"
+                        android:text="@string/logo_button_text"
+                        android:background="@android:color/transparent"
+                        android:src="@drawable/logo_texto_rioja_c_fondo"
+                        android:scaleType = "fitCenter"
+                        android:layout_gravity="top|right"
+                        android:gravity = "top|end"/>
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width ="fill_parent"
+                        android:layout_height ="wrap_content"
+                        android:layout_weight = "1">
+                        <TextView
+                            android:id="@+id/tempTextView"
+                            android:text="@string/temptxt"
+                            android:layout_height="fill_parent"
+                            android:textAppearance="?android:attr/textAppearanceLarge"
+                            android:layout_width="wrap_content"
+                            android:layout_weight="1"
+                            android:textSize="@dimen/temptxtsize"
+                            android:textColor="@color/temptxtcolor"
+                            android:shadowColor="@color/temptxtshadowcolor"
+                            android:textAlignment="center"
+                            android:layout_gravity="center"
+                            android:gravity="center" />
+                        <TextView
+                            android:id="@+id/placeHolder"
+                            android:text=" "
+                            android:layout_height="fill_parent"
+                            android:textAppearance="?android:attr/textAppearanceLarge"
+                            android:layout_width="20dp"
+                            android:textSize="@dimen/temptxtsize"
+                            android:textColor="@color/temptxtcolor"
+                            android:shadowColor="@color/temptxtshadowcolor"
+                            android:textAlignment="viewEnd"
+                            android:layout_gravity="end"
+                            android:gravity="end" />
+                    </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight = "1">
+
+
+            <TextView
+                android:id="@+id/meteoStationTextView"
+                android:text="@string/widget1txt"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:layout_width="wrap_content"
+                android:textAlignment="viewStart"
+                android:layout_gravity="bottom"
+                android:gravity = "end|start"/>
+
+            <TextView
+                android:id="@+id/timeTextView"
+                android:text="@string/datetxt"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:layout_width="match_parent"
+                android:shadowColor="@color/temptxtshadowcolor"
+                android:textAlignment="viewEnd"
+                android:layout_gravity="bottom"
+                android:gravity="end|end" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

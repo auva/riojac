@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>Temperaturas</title>
+<style>
+	canvas {
+		position: absolute;
+		top: 0;
+	}
+</style>
+<body>
+</body>
+
+<script src="d3.js"></script>
+<script>
+
+	var ax_x_margin_minutes = 15;
+	var ax_y_margin_degrees = 2;
+	var datalist = JSON.parse(Android.meteoDataJSON())
+	var windowSize = JSON.parse(Android.androidWindowSize())
+
+	var arrayTime = datalist.map(function(v) {
+		var date_parts = v.date.split('-');
+		var date_time = date_parts[2] + '-' + date_parts[1] + '-' + date_parts[0] + 'T' + v.time;
+		var parsed_date = new Date();
+		parsed_date.setTime(Date.parse(date_time));
+		return parsed_date;
+	});
+
+	var arrayTMin = datalist.map(function(v) {
+		return parseFloat(v.tempMin.replace(",", "."));
+	});
+	var arrayTMax = datalist.map(function(v) {
+		return parseFloat(v.tempMax.replace(",", "."));
+	});
+	var arrayTMean = datalist.map(function(v) {
+		return parseFloat(v.tempMean.replace(",", "."));
+	});
+
+	var tMin = Math.min.apply(Math, arrayTMin);
+
+	var tMax = Math.max.apply(Math, arrayTMax);
+
+	//var opt_size = Math.min(parseInt(windowSize.widthPixels)*0.9,
+	// parseInt(windowSize.heightPixels)*0.9)
+	var width = parseInt(windowSize.widthPixels), height = parseInt(windowSize.heightPixels), angle = 2 * Math.PI;
+
+	var start_time = d3.time.minute.offset(arrayTime[0], -ax_x_margin_minutes);
+
+	var end_time = d3.time.minute.offset(arrayTime[arrayTime.length - 1], ax_x_margin_minutes);
+
+	var hours = d3.time.hours(start_time, end_time);
+
+	var x = d3.time.scale().domain([start_time, end_time]).range([0, width]);
+
+	var y = d3.scale.linear().domain([Math.max(tMax + ax_y_margin_degrees, 1), Math.min(tMin - ax_y_margin_degrees, -1)]).range([0, height]);
+
+	var canvas = d3.select("body").append("canvas").attr("width", width).attr("height", height);
+
+	var context = canvas.node().getContext("2d");
+	
+	context.fillStyle = "steelblue";
+	context.strokeStyle = "#666";
+	context.strokeWidth = 1.5;
+
+	var ax_x = [{
+		x : x(arrayTime[0]),
+		y : y(0)
+	}, {
+		x : x(arrayTime[arrayTime.length - 1]),
+		y : y(0)
+	}];
+	// Axis at 0º
+	context.beginPath();
+	context.moveTo(ax_x[0].x, ax_x[0].y);
+	context.lineTo(ax_x[1].x, ax_x[1].y);
+	context.stroke();
+	context.closePath();
+
+	
+	datalist.forEach(function(d) {
+		var date_parts = d.date.split('-');
+		var date_time = date_parts[2] + '-' + date_parts[1] + '-' + date_parts[0] + 'T' + d.time;
+		var parsed_date = new Date();
+		parsed_date.setTime(Date.parse(date_time));
+
+		context.fillStyle = "steelblue";
+
+		context.beginPath();
+		context.arc(x(parsed_date), y(parseFloat(d.tempMean.replace(',', '.'))), 4, 0, angle);
+		context.fill();
+		context.stroke();
+
+		context.fillStyle = "orange";
+
+		context.beginPath();
+		context.arc(x(parsed_date), y(parseFloat(d.tempMin.replace(',', '.'))), 2, 0, angle);
+		context.fill();
+		context.stroke();
+
+		context.beginPath();
+		context.arc(x(parsed_date), y(parseFloat(d.tempMax.replace(',', '.'))), 2, 0, angle);
+		context.fill();
+		context.stroke();
+
+	});
+
+	context.fillStyle = "magenta";
+
+	// Compensate timezone deviations - todo fix with timezone knowledge
+	var hMin = 2;
+	hours.forEach(function(h) {
+		context.beginPath();
+		context.fillStyle = "magenta";
+		context.arc(x(h), y(0), 2, 0, angle);
+		context.fill();
+		context.stroke();
+		context.fillStyle = "black";
+		context.fillText((h.getHours()-hMin)+"H", x(h)-5, y(0)+12)
+	});
+
+	var standard_font = context.font
+
+    // Mín value
+    context.beginPath();
+    context.fillStyle = "blue";
+	context.moveTo(x(arrayTime[0]), y(tMin));
+	context.lineTo(x(arrayTime[arrayTime.length - 1]), y(tMin));
+	context.stroke();
+	context.closePath();
+
+	context.font ="35px Helvetica";
+	context.textBaseline = 'top';
+	context.fillText("Mínima: " + tMin +"ºC", x(arrayTime[0]) + 10, y(tMin) + 10);
+	context.strokeStyle = 'white';
+	context.lineWidth = 1;
+	context.strokeText("Mínima: " + tMin +"ºC", x(arrayTime[0]) + 10, y(tMin) + 10);
+
+    // Máx value
+    context.beginPath();
+    context.fillStyle = "red";
+    context.strokeStyle = 'black';
+	context.moveTo(x(arrayTime[0]), y(tMax));
+	context.lineTo(x(arrayTime[arrayTime.length - 1]), y(tMax));
+	context.stroke();
+	context.closePath();
+	context.textBaseline = 'bottom';
+	context.fillText("Máxima: " +tMax +"ºC", x(arrayTime[0]) + 10, y(tMax) - 10);
+	context.strokeStyle = 'white';
+	context.lineWidth = 1;
+    context.strokeText("Máxima: " +tMax +"ºC", x(arrayTime[0]) + 10, y(tMax) - 10);
+
+	// TODO: set the gps coordinates for every station
+	// context.fillStyle = "black";
+    // context.fillText("Amanecer: " + Android.androidSunrise() +
+    //  "    Puesta de sol: " + Android.androidSunset(), x(arrayTime[0]) + 100, y(tMax) - 30)
+
+	context.font = standard_font;
+</script>
+

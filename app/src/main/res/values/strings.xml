@@ -1,0 +1,42 @@
+<resources>
+    <string name="app_name">Rioja ºC</string>
+    <string name="action_settings">Configuración</string>
+    <string name="abouttxt">Acerca de Rioja ºC...</string>
+	<string name="hello">...</string>
+    <string name="buttontxt">Pulsa aquí</string>
+    <string name="widget1name">RiojaMet</string>
+    <string name="widget1txt">---</string>
+    <string name="temptxt">--,-°</string>
+    <string name="datetxt">--:--:--</string>
+    <string name="chart_button_text">Histórico</string>
+    <string name="title_activity_settings">Configuración</string>
+    <string name="settings_button_text">Configuración</string>
+    <string name="logo_button_text">Rioja ºC</string>
+
+    <!-- Strings related to Settings -->
+
+    <!-- Example General settings -->
+    <string name="pref_header_general">General</string>
+
+    <string name="settings_choose_meteo_station">Seleccione la estación</string>
+    <string-array name="meteo_stations_list">
+        <item>Aguilar del Río Alhama</item>
+        <item>Alfaro</item>
+        <item>Arnedo</item>
+        <item>Calahorra</item>
+        <item>Cervera del Río Alhama</item>
+        <item>Ezcaray</item>
+        <item>Haro</item>
+        <item>Logroño</item>
+        <item>Moncalvillo</item>
+        <item>Nájera</item>
+        <item>Ocón</item>
+        <item>San Román de Cameros</item>
+        <item>Santa Marina</item>
+        <item>Santo Domingo de la Calzada</item>
+        <item>Torrecilla en Cameros</item>
+        <item>Ventrosa</item>
+        <item>Villoslada de Cameros</item>
+        <item>Yerga</item>
+    </string-array>
+</resources>
