@@ -32,7 +32,7 @@ Si no puedes esperar y no quieres compilar la aplicación directamente desde las
 https://www.dropbox.com/s/vkefjvylp29jhf6/RiojaC-release-1.0.apk?dl=0
 
 # Compilación
-Puedes compilar la aplicación con AndroidStudio (comprobado con la versión 1.4); necesitarás la SDK 22 de Android y las bibliotecas de support y design.
+Puedes compilar la aplicación con AndroidStudio (comprobado con la versión 1.4); necesitarás la SDK 22 de Android y la biblioteca Android Support.
 
 # Licencia
 El código está publicado bajo la licencia GPLv3.0.
